@@ -67,13 +67,29 @@ button.read-more-btn {
   border: none;
   border-radius: 20px;
   background-color: var(--primary-color);
-  color: var(--off-white);
+  color: white;
 }
 
 button.read-more-btn:hover {
   color: var(--primary-color);
-  background-color: var(--off-white);
+  background-color: white;
   border: 0.2rem solid var(--primary-color);
+}
+
+button.repo-btn {
+  height: 2rem;
+  width: 6rem;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  margin: 0 10px;
+  color: var(--primary-color);
+  border: 0.2rem solid var(--primary-color);
+}
+
+button.repo-btn:hover {
+  color: white;
+  background-color: var(--primary-color);
 }
 
 footer.footer {
