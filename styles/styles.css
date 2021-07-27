@@ -12,6 +12,7 @@ body {
   margin: 0px;
   height: 100vh;
   font-family: Montserrat;
+  width: 100%;
 }
 
 ul.list-non-style > li {
@@ -90,7 +91,7 @@ footer.footer > a {
   padding: 0 10px;
 }
 
-footer.footer > img{
+footer.footer > img {
   color: white;
 }
 
