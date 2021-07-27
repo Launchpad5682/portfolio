@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+:root {
+  --primary-color: #2596be;
+  --off-white: #f3f4f6;
+  --dark-gray: #6b7280;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  height: 100vh;
+  font-family: Montserrat;
+}
+
+ul.list-non-style > li {
+  padding: 0 2rem;
+}
+
+nav.navigation {
+  background-color: var(--primary-color);
+  padding: 1rem 2rem;
+  border-bottom-left-radius: 50px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+ul.list-non-style {
+  list-style-type: none;
+  display: flex;
+}
+
+ul.list-non-style > li > a {
+  text-decoration: none;
+  color: var(--off-white);
+}
+
+a.name {
+  color: var(--off-white);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+li.highlighted-text > a {
+  color: white;
+  font-weight: 900;
+}
+
+section#blog-section {
+  width: 100%;
+  max-width: 600px;
+  padding-bottom: 5rem;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+div.blog-container {
+}
+
+button.read-more-btn {
+  height: 2rem;
+  width: 6rem;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--primary-color);
+  color: var(--off-white);
+}
+
+button.read-more-btn:hover {
+  color: blueviolet;
+  background-color: var(--off-white);
+  border: 0.2rem solid var(--primary-color);
+}
+
+footer.footer {
+  background-color: var(--primary-color);
+  text-align: center;
+  margin-top: auto;
+  border-top-right-radius: 20px;
+  height: 100px;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+footer.footer > a {
+  padding: 0 10px;
+}
+
+footer.footer > img{
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  nav.navigation {
+    flex-direction: column;
+  }
+  section#blog-section {
+    padding: 1rem;
+  }
+}
