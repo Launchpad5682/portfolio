@@ -84,8 +84,9 @@ span.highlight-text {
 
 p.code-text {
   background-color: var(--off-white);
-  padding: 0.8rem 0;
+  padding: 0 0.8rem;
   line-height: 30px;
+  max-width: 100%;
 }
 
 ul.lists-in-blog {
@@ -93,8 +94,7 @@ ul.lists-in-blog {
 }
 
 img.blog-images {
-  max-width: 100%
-  ;
+  max-width: 100%;
   padding: 1.2rem 0;
 }
 
