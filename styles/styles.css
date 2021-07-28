@@ -4,8 +4,6 @@
   --primary-color: #2596be;
   --off-white: #f3f4f6;
   --dark-gray: #6b7280;
-  overflow-x: hidden;
-  width: 100vw;
 }
 
 body {
@@ -98,6 +96,11 @@ footer.footer > img {
 }
 
 @media screen and (max-width: 600px) {
+  :root {
+    overflow-x: hidden;
+    width: 100vw;
+  }
+  
   nav.navigation {
     flex-direction: column;
   }

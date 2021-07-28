@@ -109,6 +109,11 @@ footer.footer > a {
 }
 
 @media screen and (max-width: 600px) {
+  :root {
+    overflow-x: hidden;
+    width: 100vw;
+  }
+  
   nav.navigation {
     flex-direction: column;
   }
