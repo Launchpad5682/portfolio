@@ -60,7 +60,7 @@ h2#blog-heading {
 }
 
 img.cover-image {
-  max-width: 600px;
+  max-width: 100%;
   align-items: center;
 }
 
