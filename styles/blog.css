@@ -93,7 +93,7 @@ ul.lists-in-blog {
 }
 
 img.blog-images {
-  max-width: 600px;
+  max-width: 100%;
   padding: 1.2rem 0;
 }
 
