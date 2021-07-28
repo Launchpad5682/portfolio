@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
+:root {
+  --primary-color: #2596be;
+  --off-white: #f3f4f6;
+  --dark-gray: #6b7280;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  height: 100vh;
+  font-family: Montserrat;
+  width: 100%;
+}
+
+ul.list-non-style > li {
+  padding: 0 2rem;
+}
+
+nav.navigation {
+  background-color: var(--primary-color);
+  padding: 1rem 2rem;
+  border-bottom-left-radius: 50px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+ul.list-non-style {
+  list-style-type: none;
+  display: flex;
+}
+
+ul.list-non-style > li > a {
+  text-decoration: none;
+  color: var(--off-white);
+}
+
+a.name {
+  color: var(--off-white);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+li.highlighted-text > a {
+  color: white;
+  font-weight: 900;
+}
+
+h2#blog-heading {
+  width: 100%;
+  max-width: 600px;
+  padding-bottom: 0.3rem;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+img.cover-image {
+  max-width: 600px;
+  align-items: center;
+}
+
+section#blog-section {
+  width: 100%;
+  max-width: 600px;
+  padding-bottom: 5rem;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+span#starting-style {
+  font-weight: 900;
+  font-size: 3rem;
+}
+
+span.highlight-text {
+  font-weight: 900;
+  font-style: italic;
+}
+
+p.code-text {
+  background-color: var(--off-white);
+  padding: 0.8rem;
+  line-height: 30px;
+}
+
+ul.lists-in-blog {
+  padding-left: 1.6rem;
+}
+
+img.blog-images {
+  max-width: 600px;
+  padding: 1.2rem 0;
+}
+
+div.blog-container {
+}
+
+span.blog-subheadings {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+button.read-more-btn {
+  height: 2rem;
+  width: 6rem;
+  border: none;
+  border-radius: 20px;
+  background-color: var(--primary-color);
+  color: var(--off-white);
+}
+
+button.read-more-btn:hover {
+  color: var(--primary-color);
+  background-color: var(--off-white);
+  border: 0.2rem solid var(--primary-color);
+}
+
+footer.footer {
+  background-color: var(--primary-color);
+  text-align: center;
+  margin-top: auto;
+  border-top-right-radius: 20px;
+  height: 100px;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+footer.footer > a {
+  padding: 0 10px;
+}
+@media screen and (max-width: 600px) {
+  nav.navigation {
+    flex-direction: column;
+  }
+  section#blog-section {
+    padding: 1rem;
+  }
+}
