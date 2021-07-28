@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/blog.css" />
+    <!-- <script src="../../scripts/blogs.js" defer></script> -->
+    <title>Video Chat using OpenCV and Socket</title>
+  </head>
+  <body>
+    <nav class="navigation">
+      <a href="/" class="name">Saurabh Suthar</a>
+      <ul class="list-non-style">
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="projects.html">Projects</a>
+        </li>
+        <li class="highlighted-text">
+          <a href="blogs.html">Blogs</a>
+        </li>
+      </ul>
+    </nav>
+    <h2 id="blog-heading">Video Chat using OpenCV and Socket</h2>
+    <section id="blog-section">
+      <img
+        class="cover-image"
+        src="https://miro.medium.com/max/8000/0*4mXa343FqYRBsnf4"
+        alt=""
+      />
+      <p>
+        <span id="starting-style">In</span> this blog, we’re going to build the
+        <span class="highlight-text">Video Chat without voice channel</span>
+        using OpenCV and Sockets in Python.
+      </p>
+      <span> Let’s start with a plan: </span>
+      <ul class="lists-in-blog">
+        <li>Create a TCP socket for one to one communication.</li>
+        <li>Take the live stream from the camera.</li>
+        <li>Use multi-threading for a duplex channel.</li>
+      </ul>
+      <p>
+        <span class="highlight-text">OpenCV</span> is the library used for image
+        and video processing using Python.We can do anything related to images
+        and videos using it. We crop, edit,create images and make videos.
+      </p>
+      <p>
+        <span class="highlight-text">Socket</span> is the low-level networking
+        interface that is used to connect two nodes on a network to communicate
+        with each other.
+      </p>
+      <p>
+        <span class="highlight-text">Threading</span> is the library used to
+        create a multi-threaded program in python.
+      </p>
+      <span>Let’s start implementing the plan:</span>
+      <p>
+        Firstly we will create the TCP socket using the socket library using the
+        following code:
+      </p>
+      <ul class="lists-in-blog">
+        <li>
+          Setting the protocol to TCP and address family to IPv4 address family.
+          <p class="code-text">
+            # tcp and ipv4 address <br />
+            familytcp = socket.SOCK_STREAM<br />
+            afm = socket.AF_INET<br />
+          </p>
+        </li>
+        <li>
+          Creating a socket using the TCP and AFM variables.
+          <p class="code-text">
+            # creating socket<br />
+            sa = socket.socket(afm,tcp) <br />
+            sb = socket.socket(afm,tcp)
+          </p>
+          <p>
+            sa and sb are the sockets created to communicate between the two
+            nodes. We can use a single socket to achieve the same too.
+          </p>
+        </li>
+        <li>
+          Binding the IP address with port number.
+          <p class="code-text">sa.bind((usera_ip,usera_port))</p>
+        </li>
+        <li>
+          Start listening at the socket.
+          <p class="code-text">sa.listen()</p>
+        </li>
+        <li>
+          Start accepting the connection from the node.
+          <p class="code-text">session, addr = sa.accept()</p>
+          <p>
+            sa.accept() is used to accept the connection request from other
+            nodes. session stores the session data and uses it to send and
+            receive the request while addr is used to store the address of the
+            receiver’s node.
+          </p>
+        </li>
+        <li>
+          Connect this node to the other node.
+          <p class="code-text">sb.connect((usera_ip,2001))</p>
+          <p>
+            Then, we need to design the sophisticated receive and send for
+            receiving and sending the video.
+          </p>
+          <img
+            src="https://miro.medium.com/max/700/1*dH0-Dc_FTTyOTfW1R_DToA.png"
+            alt=""
+            class="blog-images"
+          />
+        </li>
+      </ul>
+
+      <p>
+        receive() function includes the infinite loop of receiving the video
+        frame using the following block of code.
+      </p>
+      <p>
+        session.recv(buff_size) is used to receive the byte array from the node.
+        Then, np.frombuffer() is used to store the byte back into the numpy
+        arraay with np.uint8 data type which stores the value in the range of 0
+        to 255. Then, cv2.imdecode(image_arr, cv2.IMREAD_COLOR) is used to
+        decode the image back to the colored image with cv2.IMREAD_COLOR
+        arguement.
+      </p>
+      <p>
+        And if the image is empty with data type of Nonetype, the program will
+        pass or else show the frames continuously using cv2.imshow(image_name,
+        image) and cv2.waitKey(10) is used to make the frame wait for 10
+        milliseconds and exit if the keyword input is Enter(13) key.
+      </p>
+      <p>
+        cv2.destroyAllWindows() is used to destroy the image window completely
+        and exit the thread using os._exit(0).
+      </p>
+      <p>
+        send() function includes the infinite loop of sending the video frame
+        using the following block of code.
+      </p>
+      <img
+        src="https://miro.medium.com/max/700/1*VebakYkTxj1MAyrUPWpAMg.png"
+        alt=""
+        class="blog-images"
+      />
+      <p>
+        cv2.VideoCapture(0) is used to access the camera and the camera can be
+        changed using the number passed as an arguement. capture stores the
+        camera access methods like read() the input from the camera or release()
+        is the camera.
+      </p>
+      <p>
+        capture.read() returns two variable, first as a bool value that either
+        the picture is taken or not as true or false and second as the photo.
+      </p>
+      <p>
+        Then, if the ret is True encode the image using imencode(‘.jpg’,photo)
+        and returns two variable and second variable as the encoded array and
+        converted to the bytes using .tobytes which can be sent over the socket.
+      </p>
+      <p>
+        sendall(byte_encoded_array) sends all the data over the socket and data
+        is sent to the destination node untill all the data is sent successfully
+        to the destination node.
+      </p>
+      <img
+        src="https://miro.medium.com/max/687/1*K6T165RQUJ6cLzS219ZEgg.png"
+        alt=""
+        class="blog-images"
+      />
+      <p>
+        We need to create the threads for simultaneously receiving and sending
+        the video using thread.Thread(target=func) with the target as send() and
+        receive() giving functions to separate threads.
+      </p>
+      <img
+        src="https://miro.medium.com/max/600/1*6XTUePx45kbUOwm6oOD6Xg.gif"
+        alt=""
+        class="blog-images"
+      />
+      <p>
+        Then, we should run the programs on both the nodes. Here, I used the
+        same IP address and different ports.
+      </p>
+      <p>
+        Whoa!! we did it together. Successfully created and executd the video
+        chat program. You can check out the code using the below Github link.
+      </p>
+      <p>
+        Link:
+        <a
+          href="https://github.com/Launchpad5682/summer_training_21/tree/main/task_3"
+          >link to repository</a
+        >
+      </p>
+    </section>
+    <footer class="footer">
+      <a href="https://github.com/Launchpad5682" target="_blank"
+        ><img src="../../assets/github.png" alt=""
+      /></a>
+      <a href="https://twitter.com/saurabh22suthar" target="_blank">
+        <img src="../../assets/twitter.png" alt="" srcset=""
+      /></a>
+      <a href="https://www.linkedin.com/in/saurabhsuthar/" target="_blank">
+        <img src="../../assets/linkedin.png" alt="" srcset="" />
+      </a>
+    </footer>
+  </body>
+</html>

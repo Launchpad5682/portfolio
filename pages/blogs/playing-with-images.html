@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../styles/blog.css" />
+    <!-- <script src="../../scripts/blogs.js" defer></script> -->
+    <title>Video Chat using OpenCV and Socket</title>
+  </head>
+  <body>
+    <nav class="navigation">
+      <a href="/" class="name">Saurabh Suthar</a>
+      <ul class="list-non-style">
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="projects.html">Projects</a>
+        </li>
+        <li class="highlighted-text">
+          <a href="blogs.html">Blogs</a>
+        </li>
+      </ul>
+    </nav>
+    <h2 id="blog-heading">Video Chat using OpenCV and Socket</h2>
+    <section id="blog-section">
+      <img
+        class="cover-image"
+        src="https://miro.medium.com/max/2000/0*Rlh6GD4wjpOYU7JP"
+        alt=""
+      />
+      <p>
+        <span id="starting-style">In</span> this blog, we’re going to cover some
+        basics of image processing using OpenCV which includes drawing an image,
+        cropping the images and swapping the cropped part and joining two images
+        and create a single image.
+      </p>
+      <span class="blog-subheadings">How are images made and stored?</span>
+      <p>
+        Image is made up of pixels and stored in some of the formats like jpeg,
+        tiff or raw and three colour channels(red, green and blue) which makes a
+        coloured image. Pixel is a tiny square of colour and when put together
+        it forms an image. and pixel ranges from 0 to 255. It is stored as an
+        array of pixels and can be a 2-D array(grayscale) and a 3-D array(simple
+        grayscale image with three channels) while using images in OpenCV.
+      </p>
+      <p>Let’s get started with our agenda.</p>
+      <span class="blog-subheadings"> Drawing an Image</span>
+      <p>
+        We are going to draw a simple image of Hut with white background. We’ll
+        start by creating an image with a white background using
+        np.ones((480,640,3)) * 255 which will create an image of 480x640 with 3
+        colour channels (blue, green and red) and filled the pixels with white
+        colour.
+      </p>
+      <p class="code-text">R,G,B = (255,255,255) creates white colour.</p>
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/700/1*covmG1S1QiGGJHA9__neag.png"
+        alt=""
+      />
+      <p>
+        Now, we will create a triangle over the white background using the
+        following code:
+      </p>
+      <p class="code-text">
+        # Some random co-ordinates for the triangle<br />
+        triangle_pnts = np.array([(319,50),(165,160),(476,160)])<br />
+        # Create a contour with filled color in it <br />
+        image = cv2.drawContours(image, [triangle_pnts],0,(0,0,255),-1)
+      </p>
+      <p>
+        cv2.drawContours() creates the contours for the input co-ordinates on
+        the given input image with desired colour, filling the whole area inside
+        contour(-1) and the third argument is the index of the contour which we
+        need to draw and we passed 0 as we are filling the whole body with
+        colour and there is no need of contour.
+      </p>
+      <p>This results in a red triangle on the white background.</p>
+      <img
+        src="https://miro.medium.com/max/698/1*RM3PctgkCJzcRPlp07DOGA.png"
+        alt=""
+        class="blog-images"
+      />
+      <p>Then, we will draw a rectangle with the following code:</p>
+      <p class="code-text">
+        bgr_rectangle = (0,255,0) <br />
+        start_point = (213,160) <br />
+        end_point = (426,360) <br />
+        image = cv2.rectangle(image,start_point,end_point,bgr_rectangle,-1)
+      </p>
+      <p>
+        While creating a rectangle, we only need start point (top-left point)
+        and endpoint (bottom-right point) and in -1 thicknesses as it fills the
+        rectangle with a colour. This will result in the rectangle of green
+        colour.
+      </p>
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/679/1*39JmWIesIovuf_ccfYEamw.png"
+        alt=""
+      />
+      <p>
+        Moving on to creating a door and two windows, we’ll use the same
+        cv2.rectangle().
+      </p>
+      <p>Using the following code, the left image is achieved.</p>
+      <p class="code-text">
+        bgr_door = (255,0,0)start_point = (284,240)end_point = (355,360)image =
+        cv2.rectangle(image,start_point,end_point,bgr_door,-1)
+      </p>
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/1356/1*k6YNgNo1ZN-BcmOM7AROKQ.png"
+        alt=""
+      />
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/1390/1*Cw1ikRJ-GKncTBueeMU-KA.png"
+        alt=""
+      />
+      <p>Using the following code, right image is achieved.</p>
+      <p class="code-text">
+        bgr_window = (255,126,0)<br />
+        start_point = (255,180) <br />
+        end_point = (305,210) <br />
+        image = cv2.rectangle(image,start_point,end_point,bgr_window,-1)<br />
+        bgr_window = (255,126,0)<br />
+        start_point = (339,180)<br />
+        end_point = (389,210)<br />
+        image = cv2.rectangle(image,start_point,end_point,bgr_window,-1)
+      </p>
+      <p>We used the following code to show the images.</p>
+      <p class="code-text">
+        cv2.imshow('image',image)<br />
+        cv2.waitKey()<br />
+        cv2.destroyAllWindows()<br />
+      </p>
+      <p>
+        cv2.imshow(caption, image) takes two arguments which include the caption
+        for the image window and image array.
+      </p>
+      <p>
+        cv2.waitKey() is used to make the windows until some keyboard
+        interruption is made or we can set a time to exit the window.
+      </p>
+      <p>
+        cv2.destroyAllWindows() is used to destroy all the windows after the
+        wait is over.
+      </p>
+      <p>
+        These three lines are used to show the image while using OpenCV in
+        python.
+      </p>
+      <span class="blog-subheadings"
+        >Cropping the Images and swapping the cropped part</span
+      >
+      <p>
+        We are going to crop the images and swap them. Cropping the image can be
+        done using the slicing operation over the array. Load the images using
+        the following code: image_one = cv2.imread('image_one.jpg')image_two =
+        cv2.imread('image_two.jpg')
+      </p>
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/2000/1*A3w7RzSUxzbcEXOZWeGHlQ.png"
+        alt=""
+      />
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/2000/1*4OvrqO1StM6od6Gzx9C25w.png"
+        alt=""
+      />
+      <p>We are going to crop the image using the slicing operation.</p>
+      <p class="code-text">
+        image_one_crop = image_one[256:512,240:720].copy()<br />
+        image_two_crop = image_two[256:512,240:720].copy()
+      </p>
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/1046/1*Iau6d0IbyC67S01LG1NWJg.png"
+        alt=""
+      />
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/1014/1*13rR3xfjvr7RuNjJhrqlrw.png"
+        alt=""
+      />
+      <p>
+        Python uses memory referencing while the variable is using the same
+        values. So, we need to copy elements to a variable. If we don’t use
+        copy() then it will overwrite the pixels while swapping and only one
+        image will be replaced with the cropped part.
+      </p>
+      <p>
+        Now, swap the cropped part and then replace the image with the swapped
+        cropped part using the following code.
+      </p>
+      <p class="code-text">
+        # swapping the cropped part<br />
+        image_one_crop, image_two_crop = image_two_crop, image_one_crop
+      </p>
+      <p>
+        Then, we’ll assign the cropped and swapped part to the original images.
+      </p>
+      <p class="code-text">
+        image_one[256:512,240:720] = image_one_crop <br />
+        image_two[256:512,240:720] = image_two_crop
+      </p>
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/2000/1*MO7Bb1HiiNb4I1Vl6Fa_zA.png"
+        alt=""
+      />
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/2000/1*m-d0__66fFhXixd4twDAaA.png"
+        alt=""
+      />
+      <span class="blog-subheadings"
+        >Joining two images and create a single Image</span
+      >
+      <p>
+        To perform the join operations on the images, we only need to joint the
+        arrays using the np.hstack() or np.vstack().
+      </p>
+      <p>
+        np.hstack() will help the two arrays to be joined horizontally and
+        np.vstack() is used to join two arrays vertically.
+      </p>
+      <p>
+        Using the following code, we joined the two images horizontally and
+        vertically.
+      </p>
+      <p class="code-text">
+        image_join_1 = np.hstack([image_1,image_2])<br />
+        image_join_2 = np.hstack([image_2,image_1])<br />
+        image_join = np.vstack([image_join_1,image_join_2])
+      </p>
+      <p>
+        Now, the image is 4 times the original dimension then we need to resize
+        the image to the original dimension using the INTER_AREA interpolation
+        which is usually used for downsizing the image.
+      </p>
+      <p class="code-text">
+        dims = (image_1.shape[1],image_1.shape[0])<br />
+        resized = cv2.resize(image_join,dims,interpolation=cv2.INTER_AREA)
+      </p>
+      <p>And now the image is finally created.</p>
+      <img
+        class="blog-images"
+        src="https://miro.medium.com/max/2000/1*IbfQZxgzf547PNB6tZvnqQ.png"
+        alt=""
+      />
+      <p>
+        Yeah, we accomplished our agenda. Give a 👏, if you found it
+        interesting.
+      </p>
+      <p>
+        Link:
+        <a
+          href="https://github.com/Launchpad5682/summer_training_21/tree/main/task_4"
+          >link to repository</a
+        >
+      </p>
+    </section>
+    <footer class="footer">
+      <a href="https://github.com/Launchpad5682" target="_blank"
+        ><img src="../../assets/github.png" alt=""
+      /></a>
+      <a href="https://twitter.com/saurabh22suthar" target="_blank">
+        <img src="../../assets/twitter.png" alt="" srcset=""
+      /></a>
+      <a href="https://www.linkedin.com/in/saurabhsuthar/" target="_blank">
+        <img src="../../assets/linkedin.png" alt="" srcset="" />
+      </a>
+    </footer>
+  </body>
+</html>
