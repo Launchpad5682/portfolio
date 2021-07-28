@@ -1,14 +1,16 @@
 const blogList = [
   {
     name: "Video Chat using OpenCV and Socket",
-    url: "https://link.medium.com/iZEMSuubeib ",
+    // url: "https://link.medium.com/iZEMSuubeib "
+    url: "../pages/blogs/video_chat.html",
     date: "7 Jul, 2021",
     description:
       "This blog gives the basic introduction and how to create a simple Only Video Chat App using Sockets and OpenCV.",
   },
   {
     name: "Playing with Images using OpenCV",
-    url: "https://link.medium.com/rOukQrzbeib",
+    //url: "https://link.medium.com/rOukQrzbeib",
+    url: "../pages/blogs/playing-with-images.html",
     date: "4 Jun, 2021",
     description:
       "This blogs gives an introduction to manipulate images using OpenCV.",
