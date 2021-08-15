@@ -121,3 +121,11 @@ for (let i = 0; i < btns.length; i++) {
     window.open(event.target.value);
   });
 }
+
+let repoBtn = document.getElementsByClassName("repo-btn");
+
+for (let i = 0; i < repoBtn.length; i++) {
+  repoBtn[i].addEventListener("click", (event) => {
+    window.open(event.target.value);
+  });
+}
