@@ -48,7 +48,7 @@ const projectsList = [
   {
     name: "Birthday Lucky",
     repo_url: "https://github.com/Launchpad5682/birthday-lucky",
-    live_url: "",
+    live_url: "https://birthday-lucky-launchpad5682.netlify.app/",
     description:
       "A simple application to check whether the birth date is lucky or not by using the lucky number to divide it from birth date and if it's divisible then the birth date is lucky.",
   },
