@@ -62,7 +62,7 @@ const projectsList = [
   {
     name: "Birthday Palindrome",
     repo_url: "https://github.com/Launchpad5682/birthday-palindrome",
-    live_url: "",
+    live_url: "https://birthday-palindrome-launchpad5682.netlify.app/",
     description:
       "A simple application to check whether your birthday is palindrome or not.",
   },
